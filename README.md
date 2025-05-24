@@ -15,21 +15,21 @@ Créer une application web en utilisant le framework Spring Boot , permettant de
 #### 1. Entité : Patient
  -  Package : net.zerhouani.hospitalspringmvc.entities
  -  Annotations utilisées :
-  *   @Entity : Pour la persistance JPA.
-  *  @Data, @NoArgsConstructor, @AllArgsConstructor, @Builder : Via Lombok pour réduire le code boilerplate.
+     *   @Entity : Pour la persistance JPA.
+     *  @Data, @NoArgsConstructor, @AllArgsConstructor, @Builder : Via Lombok pour réduire le code boilerplate.
  -  Champs : id (auto-généré) - nom - dateNaissance - malade (boolean) - score
 #### 3. Repository : PatientRepository
  -  Package : net.zerhouani.hospitalspringmvc.repository
  -  Interface qui étend JpaRepository.
  -  Méthodes personnalisées :
-  *  findByNomContains(String keyword, Pageable pageable)
-  *  Requête personnalisée via JPQL : cherher(@Param("x") String keyword, Pageable pageable)
+     *  findByNomContains(String keyword, Pageable pageable)
+     *  Requête personnalisée via JPQL : cherher(@Param("x") String keyword, Pageable pageable)
 #### 4. Contrôleur : PatientController
  -  Package : net.zerhouani.hospitalspringmvc.web
  -  Gère les requêtes HTTP :
-   * "/index"  : Affiche la liste paginée des patients.
-   * "/delete" : Supprime un patient par son ID (redirige vers /index).
-   * "/"       : Redirection vers /index.
+      * "/index"  : Affiche la liste paginée des patients.
+      * "/delete" : Supprime un patient par son ID (redirige vers /index).
+      * "/"       : Redirection vers /index.
 #### 5. Application principale : HospitalSpringMvcApplication
  -  Lance l’application Spring Boot.
  -  Implémente CommandLineRunner pour insérer des données de test à l’exécution :
