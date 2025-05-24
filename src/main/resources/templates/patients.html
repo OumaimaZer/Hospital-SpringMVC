@@ -14,7 +14,7 @@
         <tr>
           <th>ID</th> <th>Nom</th> <th>Date</th> <th>Malade</th> <th>Score</th>
         </tr>
-        <tr th:each="p:${ListePatients}">
+        <tr th:each="p:${pagePatients}">
           <td th:text="${p.id}"></td>
           <td th:text="${p.nom}"></td>
           <td th:text="${p.dateNaissance}"></td>
@@ -23,6 +23,11 @@
         </tr>
         </thead>
       </table>
+      <ul class="nav nav-pills">
+        <li th:each="page,status:${pages}">
+          <a class="btn btn-outline-info" th:href="@{/index(page=${status.index})}" th:text="${status.index}"></a>
+        </li>
+      </ul>
     </div>
   </div>
 </body>
