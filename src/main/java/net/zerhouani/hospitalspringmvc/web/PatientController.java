@@ -1,5 +1,6 @@
 package net.zerhouani.hospitalspringmvc.web;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import net.zerhouani.hospitalspringmvc.entities.Patient;
 import net.zerhouani.hospitalspringmvc.repository.PatientRepository;
@@ -7,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,9 +50,21 @@ public class PatientController {
     }
 
     @PostMapping("/save")
-    public String save(Model model, Patient patient){
+    public String save(Model model, @Valid Patient patient, BindingResult bindingResult,
+                       @RequestParam(name="keyword", defaultValue = "") String keyword,@RequestParam(name="page", defaultValue = "0") int page){
+        if(bindingResult.hasErrors())  return "formPatients";
         patientRepository.save(patient);
         System.out.println("Enregistré");
-        return "formPatients";
+        return "redirect:/index?page="+page+"&keyword="+keyword;
+    }
+
+    @GetMapping("/editPatient")
+    public String editPatient(Model model, Long id, @RequestParam(name="keyword", defaultValue = "") String keyword,@RequestParam(name="page", defaultValue = "0") int page){
+        Patient patient = patientRepository.findById(id).orElse(null);
+        if(patient == null) throw new RuntimeException("Patient doesn't exist");
+        model.addAttribute("patient", patient);
+        model.addAttribute("keyword",keyword);
+        model.addAttribute("page",page);
+        return "editPatient";
     }
 }

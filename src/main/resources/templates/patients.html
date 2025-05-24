@@ -38,6 +38,11 @@
                class="btn btn-danger" th:href="@{delete(id=${p.id}, keyword=${keyword}, page=${currentPage})}">
               <i class="bi bi-trash"></i>
               </a>
+
+            <a onclick="return confirm('Are you sure you want to update this user?')"
+               class="btn btn-warning" th:href="@{editPatient(id=${p.id}, keyword=${keyword}, page=${currentPage})}">
+              <i class="bi bi-pen"></i>
+            </a>
           </td>
         </tr>
         </thead>
