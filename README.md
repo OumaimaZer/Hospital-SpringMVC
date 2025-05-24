@@ -5,7 +5,7 @@ Lien : [https://www.youtube.com/watch?v=Kfv_7m8INlU](https://www.youtube.com/wat
 
 ## Objectif du TP
 Créer une application web en utilisant le framework Spring Boot , permettant de : 
- - Afficher une liste paginée de patients.
+ -  Afficher une liste paginée de patients.
  -  Rechercher des patients par leur nom.
  -  Supprimer des patients.
  -  Utiliser Bootstrap 5 et Font Awesome (via Bootstrap Icons) pour la mise en forme visuelle.
@@ -13,51 +13,51 @@ Créer une application web en utilisant le framework Spring Boot , permettant de
 
 ## Structure du Projet
 #### 1. Entité : Patient
-  Package : net.zerhouani.hospitalspringmvc.entities
-  Annotations utilisées :
-    @Entity : Pour la persistance JPA.
-    @Data, @NoArgsConstructor, @AllArgsConstructor, @Builder : Via Lombok pour réduire le code boilerplate.
-  Champs : id (auto-généré) - nom - dateNaissance - malade (boolean) - score
+ -  Package : net.zerhouani.hospitalspringmvc.entities
+ -  Annotations utilisées :
+  *   @Entity : Pour la persistance JPA.
+  *  @Data, @NoArgsConstructor, @AllArgsConstructor, @Builder : Via Lombok pour réduire le code boilerplate.
+ -  Champs : id (auto-généré) - nom - dateNaissance - malade (boolean) - score
 #### 3. Repository : PatientRepository
-  Package : net.zerhouani.hospitalspringmvc.repository
-  Interface qui étend JpaRepository.
-  Méthodes personnalisées :
-    findByNomContains(String keyword, Pageable pageable)
-    Requête personnalisée via JPQL : cherher(@Param("x") String keyword, Pageable pageable)
+ -  Package : net.zerhouani.hospitalspringmvc.repository
+ -  Interface qui étend JpaRepository.
+ -  Méthodes personnalisées :
+  *  findByNomContains(String keyword, Pageable pageable)
+  *  Requête personnalisée via JPQL : cherher(@Param("x") String keyword, Pageable pageable)
 #### 4. Contrôleur : PatientController
-  Package : net.zerhouani.hospitalspringmvc.web
-  Gère les requêtes HTTP :
-    "/index"  : Affiche la liste paginée des patients.
-    "/delete" : Supprime un patient par son ID (redirige vers /index).
-    "/"       : Redirection vers /index.
+ -  Package : net.zerhouani.hospitalspringmvc.web
+ -  Gère les requêtes HTTP :
+   * "/index"  : Affiche la liste paginée des patients.
+   * "/delete" : Supprime un patient par son ID (redirige vers /index).
+   * "/"       : Redirection vers /index.
 #### 5. Application principale : HospitalSpringMvcApplication
-  Lance l’application Spring Boot.
-  Implémente CommandLineRunner pour insérer des données de test à l’exécution :
-  Insertion de trois patients dans la base H2 embarquée.
+ -  Lance l’application Spring Boot.
+ -  Implémente CommandLineRunner pour insérer des données de test à l’exécution :
+ -  Insertion de trois patients dans la base H2 embarquée.
 #### 6. Vue Thymeleaf : patients.html
-  Template HTML avec intégration de Bootstrap 5 via WebJars.
-  Formulaire de recherche.
-  Tableau affichant les patients.
-  Pagination dynamique.
-  Icônes FontAwesome (via Bootstrap Icons).
-  Intégration jQuery pour interactivité.
+ -  Template HTML avec intégration de Bootstrap 5 via WebJars.
+ -  Formulaire de recherche.
+ -  Tableau affichant les patients.
+ -  Pagination dynamique.
+ -  Icônes FontAwesome (via Bootstrap Icons).
+ -  Intégration jQuery pour interactivité.
 
 ## Dépendances principales :
-  Spring Data JPA : Persistance ORM
-  Thymeleaf : Moteur de template
-  Spring Web : Serveur web intégré
-  H2 Database : Base de données en mémoire pour tests
-  Bootstrap & Bootstrap-icons : Styling CSS/JS
-  Lombok : Réduction du code boilerplate
-  MySQL Connector : Connexion à MySQL (facultatif si utilisé)
+ -  Spring Data JPA : Persistance ORM
+ -  Thymeleaf : Moteur de template
+ -  Spring Web : Serveur web intégré
+ -  H2 Database : Base de données en mémoire pour tests
+ -  Bootstrap & Bootstrap-icons : Styling CSS/JS
+ -  Lombok : Réduction du code boilerplate
+ -  MySQL Connector : Connexion à MySQL (facultatif si utilisé)
 
 ## Fonctionnalités Implémentées :
-  Recherche par nom : Permet de filtrer les patients selon un mot-clé.
-  Pagination : Affichage paginé (4 éléments par page).
-  Suppression : Supprime un patient avec confirmation JavaScript.
-  Redirection après suppression : Retourne à la page précédente avec le mot-clé actuel.
-  Interface utilisateur : Design responsive avec Bootstrap 5.
-  Données initiales : Insertion automatique au démarrage de l’appli.
+ -  Recherche par nom : Permet de filtrer les patients selon un mot-clé.
+ -  Pagination : Affichage paginé (4 éléments par page).
+ -  Suppression : Supprime un patient avec confirmation JavaScript.
+ -  Redirection après suppression : Retourne à la page précédente avec le mot-clé actuel.
+ -  Interface utilisateur : Design responsive avec Bootstrap 5.
+ -  Données initiales : Insertion automatique au démarrage de l’appli.
 
 ## Démonstration
 
