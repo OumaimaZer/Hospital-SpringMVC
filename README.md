@@ -2,7 +2,7 @@
 Cette vidéo offre une démonstration pratique de la mise en œuvre d'une application Spring Boot avec Spring MVC, JPA et Thymeleaf. Ce projet représente une application web simple permettant de gérer une liste de patients dans un système hospitalier.
 
 Lien : [https://www.youtube.com/watch?v=Kfv_7m8INlU](https://www.youtube.com/watch?v=jDm-q-jEbiA)
-       https://www.youtube.com/watch?v=eoBE745lDE0
+         &&  https://www.youtube.com/watch?v=eoBE745lDE0
 
 ## Objectif du TP
 Créer une application web en utilisant le framework Spring Boot , permettant de : 
@@ -87,6 +87,7 @@ Créer une application web en utilisant le framework Spring Boot , permettant de
 ![image](https://github.com/user-attachments/assets/02f8d4b2-4376-46e9-b9d4-aca08d1d2432)
 ![image](https://github.com/user-attachments/assets/64d3f5c4-3757-4696-aa2e-3089d2141fb9)
 
+
 ### Realisation :
 ![image](https://github.com/user-attachments/assets/b11fdd87-c511-4cd9-ab97-e2f11d2c0518)
 ![image](https://github.com/user-attachments/assets/1045709f-553a-4f61-ace7-50d0ec1585c7)
@@ -97,13 +98,16 @@ Recherche et positionnement :
 ![image](https://github.com/user-attachments/assets/678354bc-055e-4455-a548-ee99b1df61ee)
 ![image](https://github.com/user-attachments/assets/6479cd25-6a80-4133-8140-5085059f60b6)
 
+
 Création d'une instance:
 ![image](https://github.com/user-attachments/assets/634f3f2b-cb85-49ec-95f3-de442c3334f7)
 ![image](https://github.com/user-attachments/assets/61fa6d57-e86a-4131-b36e-0d4e19059182)
 
+
 Suppression :
 ![image](https://github.com/user-attachments/assets/8cd70ad8-baca-4925-831a-48fd9c3334a9)
 ![image](https://github.com/user-attachments/assets/42e722cc-cb74-4974-81f2-0646c1c83482)
+
 
 Modification:
 ![image](https://github.com/user-attachments/assets/b9c121ea-64fe-45ae-9644-1db74f379316)
