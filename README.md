@@ -1,12 +1,15 @@
-# Rapport de la vidéo Part 1-Demo Spring MVC Thylemeaf Spring Data JPA, réalisée par Mr.Mohamed Youssfi
+# Rapport de la vidéo Spring MVC Thylemeaf Spring Data JPA, réalisée par Mr.Mohamed Youssfi
 Cette vidéo offre une démonstration pratique de la mise en œuvre d'une application Spring Boot avec Spring MVC, JPA et Thymeleaf. Ce projet représente une application web simple permettant de gérer une liste de patients dans un système hospitalier.
 
 Lien : [https://www.youtube.com/watch?v=Kfv_7m8INlU](https://www.youtube.com/watch?v=jDm-q-jEbiA)
+       https://www.youtube.com/watch?v=eoBE745lDE0
 
 ## Objectif du TP
 Créer une application web en utilisant le framework Spring Boot , permettant de : 
  -  Afficher une liste paginée de patients.
  -  Rechercher des patients par leur nom.
+ -  Ajouter des patients
+ -  Modification des patients.
  -  Supprimer des patients.
  -  Utiliser Bootstrap 5 et Font Awesome (via Bootstrap Icons) pour la mise en forme visuelle.
  -  Utiliser Thymeleaf comme moteur de template HTML.
@@ -27,9 +30,12 @@ Créer une application web en utilisant le framework Spring Boot , permettant de
 #### 4. Contrôleur : PatientController
  -  Package : net.zerhouani.hospitalspringmvc.web
  -  Gère les requêtes HTTP :
-      * "/index"  : Affiche la liste paginée des patients.
-      * "/delete" : Supprime un patient par son ID (redirige vers /index).
-      * "/"       : Redirection vers /index.
+      * GET "/index"  : Affiche la liste paginée des patients.
+      * GET "/delete" : Supprime un patient par son ID (redirige vers /index).
+      * GET "/"       : Redirection vers /index.
+      * GET "/formPatients" : Formulaire de création
+      * POST "/save" : Enregistrement d’un nouveau ou mise à jour
+      * GET "/editPatient" : Modification d’un patient existant
 #### 5. Application principale : HospitalSpringMvcApplication
  -  Lance l’application Spring Boot.
  -  Implémente CommandLineRunner pour insérer des données de test à l’exécution :
@@ -41,6 +47,17 @@ Créer une application web en utilisant le framework Spring Boot , permettant de
  -  Pagination dynamique.
  -  Icônes FontAwesome (via Bootstrap Icons).
  -  Intégration jQuery pour interactivité.
+ -  Button de suppression.
+ -  Button de modification.
+#### 7. Vue Thymeleaf : editPatient.html et formPatient.html
+ -  Template HTML avec intégration de Bootstrap 5 via WebJars.
+ -  Intégration jQuery pour interactivité.
+ -  Ajout d'un nouveau patient depuis un formulaire.
+ -  Modification d'un patient existant à partir d'un formulaire.
+#### 8. Vue Thymeleaf : template1.html
+ -  Template HTML avec intégration de Bootstrap 5 via WebJars.
+ -  Intégration jQuery pour interactivité.
+ -  Création d'un navbar intéractive.
 
 ## Dépendances principales :
  -  Spring Data JPA : Persistance ORM
@@ -58,6 +75,10 @@ Créer une application web en utilisant le framework Spring Boot , permettant de
  -  Redirection après suppression : Retourne à la page précédente avec le mot-clé actuel.
  -  Interface utilisateur : Design responsive avec Bootstrap 5.
  -  Données initiales : Insertion automatique au démarrage de l’appli.
+ -  Création de nouveaux patients.
+ -  Édition de patients : Permet de modifier les informations d'un patient existant.
+ -  Validation des données : Permet de vérifier certaines contraintes dans la saisie avant la création d'n nouveau patient.
+ -  
 
 ## Démonstration
 
@@ -68,13 +89,25 @@ Créer une application web en utilisant le framework Spring Boot , permettant de
 
 ### Realisation :
 ![image](https://github.com/user-attachments/assets/b11fdd87-c511-4cd9-ab97-e2f11d2c0518)
+![image](https://github.com/user-attachments/assets/1045709f-553a-4f61-ace7-50d0ec1585c7)
+![image](https://github.com/user-attachments/assets/92d07d86-9773-4572-87f8-e417a6aa0bcf)
+
 
 Recherche et positionnement :
 ![image](https://github.com/user-attachments/assets/678354bc-055e-4455-a548-ee99b1df61ee)
+![image](https://github.com/user-attachments/assets/6479cd25-6a80-4133-8140-5085059f60b6)
+
+Création d'une instance:
+![image](https://github.com/user-attachments/assets/634f3f2b-cb85-49ec-95f3-de442c3334f7)
+![image](https://github.com/user-attachments/assets/61fa6d57-e86a-4131-b36e-0d4e19059182)
 
 Suppression :
 ![image](https://github.com/user-attachments/assets/8cd70ad8-baca-4925-831a-48fd9c3334a9)
 ![image](https://github.com/user-attachments/assets/42e722cc-cb74-4974-81f2-0646c1c83482)
+
+Modification:
+![image](https://github.com/user-attachments/assets/b9c121ea-64fe-45ae-9644-1db74f379316)
+
 
 ## Conclusion
 Ce TP illustre parfaitement les bases de la création d’une application MVC avec Spring Boot , utilisant JPA , Thymeleaf et des outils modernes comme Bootstrap . Il s’agit d’un bon point de départ pour développer une application de gestion hospitalière plus complète, notamment en ajoutant des fonctionnalités CRUD et une sécurité (ex: Spring Security).
