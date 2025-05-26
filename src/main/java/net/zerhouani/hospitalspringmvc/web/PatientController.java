@@ -40,7 +40,7 @@ public class PatientController {
 
     @GetMapping("/")
     public String home(){
-        return "redirect:/user//index";
+        return "redirect:/user/index";
     }
 
     @GetMapping("/admin/formPatients")
