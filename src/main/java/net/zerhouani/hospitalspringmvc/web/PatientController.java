@@ -19,7 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 public class PatientController {
     private PatientRepository patientRepository;
-    @GetMapping("/index")
+    @GetMapping("/user/index")
     public String index(Model model,
                         @RequestParam(name="page", defaultValue = "0") int page,
                         @RequestParam(name="size", defaultValue = "4") int size,
@@ -32,33 +32,33 @@ public class PatientController {
         return "patients";
     }
 
-    @GetMapping("/delete")
+    @GetMapping("/admin/delete")
     public String delete(Long id,@RequestParam(name="keyword", defaultValue = "") String keyword,@RequestParam(name="page", defaultValue = "0") int page){
         patientRepository.deleteById(id);
-        return "redirect:/index?page="+page+"&keyword="+keyword;
+        return "redirect:/user/index?page="+page+"&keyword="+keyword;
     }
 
     @GetMapping("/")
     public String home(){
-        return "redirect:/index";
+        return "redirect:/user//index";
     }
 
-    @GetMapping("/formPatients")
+    @GetMapping("/admin/formPatients")
     public String formPatients(Model model){
         model.addAttribute("patient",new Patient());
         return "formPatients";
     }
 
-    @PostMapping("/save")
+    @PostMapping("/admin/save")
     public String save(Model model, @Valid Patient patient, BindingResult bindingResult,
                        @RequestParam(name="keyword", defaultValue = "") String keyword,@RequestParam(name="page", defaultValue = "0") int page){
         if(bindingResult.hasErrors())  return "formPatients";
         patientRepository.save(patient);
         System.out.println("Enregistré");
-        return "redirect:/index?page="+page+"&keyword="+keyword;
+        return "redirect:/user/index?page="+page+"&keyword="+keyword;
     }
 
-    @GetMapping("/editPatient")
+    @GetMapping("/admin/editPatient")
     public String editPatient(Model model, Long id, @RequestParam(name="keyword", defaultValue = "") String keyword,@RequestParam(name="page", defaultValue = "0") int page){
         Patient patient = patientRepository.findById(id).orElse(null);
         if(patient == null) throw new RuntimeException("Patient doesn't exist");
