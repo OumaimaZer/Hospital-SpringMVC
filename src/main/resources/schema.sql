@@ -1,3 +1,6 @@
+DROP TABLE IF EXISTS authorities;
+DROP TABLE IF EXISTS users;
+
 CREATE TABLE if not exists users (
                        username VARCHAR(50) NOT NULL PRIMARY KEY,
                        password VARCHAR(500) NOT NULL,
@@ -10,4 +13,4 @@ CREATE TABLE if not exists authorities (
                              CONSTRAINT fk_authorities_users FOREIGN KEY (username) REFERENCES users(username)
 );
 
-CREATE UNIQUE if not exists INDEX ix_auth_username ON authorities (username, authority);
+CREATE UNIQUE INDEX ix_auth_username ON authorities (username, authority);

@@ -51,16 +51,13 @@ public class SecurityConfig {
     @Bean
     CommandLineRunner commandLineRunner(JdbcUserDetailsManager jdbcUserDetailsManager) {
         return args -> {
-            UserDetails u1 = jdbcUserDetailsManager.loadUserByUsername("user1");
-            if (u1 == null) {
+            if (!jdbcUserDetailsManager.userExists("user1")) {
                 jdbcUserDetailsManager.createUser(User.withUsername("user1").password(passwordEncoder().encode("123")).roles("USER").build());
             }
-            UserDetails u2 = jdbcUserDetailsManager.loadUserByUsername("user2");
-            if (u2 == null) {
+            if (!jdbcUserDetailsManager.userExists("user2")) {
                 jdbcUserDetailsManager.createUser(User.withUsername("user2").password(passwordEncoder().encode("123")).roles("USER").build());
             }
-            UserDetails u3 = jdbcUserDetailsManager.loadUserByUsername("admin");
-            if(u3 == null) {
+            if (!jdbcUserDetailsManager.userExists("admin")) {
             jdbcUserDetailsManager.createUser(User.withUsername("admin").password(passwordEncoder().encode("123")).roles("USER","ADMIN").build());
         }
         };

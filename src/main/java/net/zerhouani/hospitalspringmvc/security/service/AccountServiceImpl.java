@@ -1,0 +1,64 @@
+package net.zerhouani.hospitalspringmvc.security.service;
+
+import lombok.AllArgsConstructor;
+import net.zerhouani.hospitalspringmvc.security.entities.AppRole;
+import net.zerhouani.hospitalspringmvc.security.entities.AppUser;
+import net.zerhouani.hospitalspringmvc.security.repo.AppRoleRepository;
+import net.zerhouani.hospitalspringmvc.security.repo.AppUserRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.UUID;
+
+@Service
+@Transactional
+@AllArgsConstructor
+public class AccountServiceImpl implements AccountService {
+    private final AppUserRepository appUserRepository;
+    private final AppRoleRepository appRoleRepository;
+    private AppRoleRepository roleRepository;
+    private AppUserRepository userRepository;
+
+    @Override
+    public AppUser addNewUser(String username, String password, String email, String confirmPassword) {
+        AppUser appUser = appUserRepository.findByUsername(username);
+        if (appUser != null) throw new RuntimeException("User already exists");
+        if(!password.equals(confirmPassword)) throw new RuntimeException("Passwords do not match");
+        appUser = AppUser.builder()
+                .userId(UUID.randomUUID().toString())
+                .username(username)
+                .password(password)
+                .email(email)
+                .build();
+        AppUser savedAppUser = appUserRepository.save(appUser);
+        return savedAppUser;
+    }
+
+    @Override
+    public AppRole addNewRole(Long roleId, String role) {
+        AppRole appRole = appRoleRepository.findById(roleId).orElse(null);
+        if (appRole != null) throw new RuntimeException("Role already exists");
+        appRole = roleRepository.save(AppRole.builder().id(roleId).role(role).build());
+        return appRole;
+    }
+
+    @Override
+    public void addRoleToUser(String username, Long roleId) {
+        AppUser appUser = appUserRepository.findByUsername(username);
+        AppRole appRole = appRoleRepository.findById(roleId).get();
+        appUser.getRoles().add(appRole);
+        //appUserRepository.save(appUser);
+    }
+
+    @Override
+    public void removeRoleFromUser(String username, Long roleId) {
+        AppUser appUser = appUserRepository.findByUsername(username);
+        AppRole appRole = appRoleRepository.findById(roleId).get();
+        appUser.getRoles().remove(appRole);
+    }
+
+    @Override
+    public AppUser loadUserByUsername(String username) {
+        return appUserRepository.findByUsername(username);
+    }
+}
