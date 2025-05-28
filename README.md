@@ -112,6 +112,22 @@ Suppression :
 Modification:
 ![image](https://github.com/user-attachments/assets/b9c121ea-64fe-45ae-9644-1db74f379316)
 
+Sécurité :
+![image](https://github.com/user-attachments/assets/0cd9d971-cbe5-4472-bbda-ba10ec85f4c5)
+![image](https://github.com/user-attachments/assets/226fb24e-1f58-4ac3-9dcd-3aa45e7e1ef7)
+
+![image](https://github.com/user-attachments/assets/76f10a42-6f82-4704-82ae-998f644f829b)
+![image](https://github.com/user-attachments/assets/f7d348aa-7f07-469b-8013-d056edead784)
+![image](https://github.com/user-attachments/assets/d9f42d66-0e91-4ba3-a0ae-5bea2308de3e)
+![image](https://github.com/user-attachments/assets/1457c7a9-d260-4c2e-82b9-5594c959f698)
+
+![image](https://github.com/user-attachments/assets/36800a70-9c29-4f42-a572-d8c67ea496e3)
+
+
+
+
+
+
 
 ## Conclusion
 Ce TP illustre parfaitement les bases de la création d’une application MVC avec Spring Boot , utilisant JPA , Thymeleaf et des outils modernes comme Bootstrap . Il s’agit d’un bon point de départ pour développer une application de gestion hospitalière plus complète, notamment en ajoutant des fonctionnalités CRUD et une sécurité (ex: Spring Security).
