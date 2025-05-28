@@ -1,1 +1,0 @@
-insert into users(username, password, enabled) values ('users1', '123', true);

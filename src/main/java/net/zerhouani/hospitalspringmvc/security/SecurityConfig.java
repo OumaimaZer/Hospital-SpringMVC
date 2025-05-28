@@ -1,11 +1,15 @@
 package net.zerhouani.hospitalspringmvc.security;
 
 
+import lombok.AllArgsConstructor;
+import net.zerhouani.hospitalspringmvc.security.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -22,6 +26,8 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity(prePostEnabled = true)
+@AllArgsConstructor
 public class SecurityConfig {
 
     /** @Bean
@@ -34,21 +40,23 @@ public class SecurityConfig {
         };
     } **/
 
-    @Bean
+    private UserDetailsServiceImpl userDetailsService;
+
+    //@Bean
     public JdbcUserDetailsManager userDetailsManager(DataSource dataSource) {
         return new JdbcUserDetailsManager(dataSource);
     }
 
-    //@Bean
+    /**@Bean
     public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
         return new InMemoryUserDetailsManager(
                 User.withUsername("user1").password(passwordEncoder().encode("123")).roles("USER").build(),
                 User.withUsername("user2").password(passwordEncoder().encode("123")).roles("USER").build(),
                 User.withUsername("admin").password(passwordEncoder().encode("123")).roles("USER", "ADMIN").build()
         );
-    }
+    }**/
 
-    @Bean
+   /** @Bean
     CommandLineRunner commandLineRunner(JdbcUserDetailsManager jdbcUserDetailsManager) {
         return args -> {
             if (!jdbcUserDetailsManager.userExists("user1")) {
@@ -61,7 +69,7 @@ public class SecurityConfig {
             jdbcUserDetailsManager.createUser(User.withUsername("admin").password(passwordEncoder().encode("123")).roles("USER","ADMIN").build());
         }
         };
-    }
+    }**/
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -79,13 +87,12 @@ public class SecurityConfig {
                 .exceptionHandling(exception -> exception
                         .accessDeniedPage("/notAuthorized")
                 )
+
+                .userDetailsService(userDetailsService)
                 .rememberMe(Customizer.withDefaults());
 
         return http.build();
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+
 }

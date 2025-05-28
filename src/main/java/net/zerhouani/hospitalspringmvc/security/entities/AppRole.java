@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class AppRole {
     @Id
-    private Long id;
     private String role;
+
 }

@@ -9,6 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Date;
 
@@ -18,9 +20,15 @@ public class HospitalSpringMvcApplication implements CommandLineRunner {
     @Autowired
     private PatientRepository patientRepository;
 
+
     public static void main(String[] args) {
         SpringApplication.run(HospitalSpringMvcApplication.class, args);
 
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     @Override
@@ -39,18 +47,19 @@ public class HospitalSpringMvcApplication implements CommandLineRunner {
     }
 
     @Bean
-    CommandLineRunner commandLineRunner(AccountService accountService) {
+    CommandLineRunner commandLineRunnerUserDetails(AccountService accountService) {
         return args -> {
-            accountService.addNewRole(1L,"USER");
-            accountService.addNewRole(2L,"ADMIN");
-            accountService.addNewUser("user1","123","user1@gmail.com","123");
-            accountService.addNewUser("user1","123","user1@gmail.com","123");
-            accountService.addNewUser("user1","123","user1@gmail.com","123");
+            accountService.addNewRole("USER");
+            accountService.addNewRole("ADMIN");
+            String pass = passwordEncoder().encode("123");
+            accountService.addNewUser("user1",pass,"user1@gmail.com",pass);
+            accountService.addNewUser("user2",pass,"user1@gmail.com",pass);
+            accountService.addNewUser("admin",pass,"user1@gmail.com",pass);
 
-            accountService.addRoleToUser("user1",1L);
-            accountService.addRoleToUser("user2",1L);
-            accountService.addRoleToUser("admin",1L);
-            accountService.addRoleToUser("admin",2L);
+            accountService.addRoleToUser("user1", "USER");
+            accountService.addRoleToUser("user2","USER");
+            accountService.addRoleToUser("admin","USER");
+            accountService.addRoleToUser("admin","ADMIN");
 
         };
     }
