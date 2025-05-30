@@ -13,6 +13,8 @@ Créer une application web en utilisant le framework Spring Boot , permettant de
  -  Supprimer des patients.
  -  Utiliser Bootstrap 5 et Font Awesome (via Bootstrap Icons) pour la mise en forme visuelle.
  -  Utiliser Thymeleaf comme moteur de template HTML.
+ -  Gestion de la sécurité.
+ -  Gestion de l'authentification
 
 ## Structure du Projet
 #### 1. Entité : Patient
@@ -30,16 +32,19 @@ Créer une application web en utilisant le framework Spring Boot , permettant de
 #### 4. Contrôleur : PatientController
  -  Package : net.zerhouani.hospitalspringmvc.web
  -  Gère les requêtes HTTP :
-      * GET "/index"  : Affiche la liste paginée des patients.
-      * GET "/delete" : Supprime un patient par son ID (redirige vers /index).
+      * GET "/user/index"  : Affiche la liste paginée des patients.
+      * GET "/admin/delete" : Supprime un patient par son ID (redirige vers /index).
       * GET "/"       : Redirection vers /index.
-      * GET "/formPatients" : Formulaire de création
-      * POST "/save" : Enregistrement d’un nouveau ou mise à jour
-      * GET "/editPatient" : Modification d’un patient existant
+      * GET "/admin/formPatients" : Formulaire de création
+      * POST "/admin/save" : Enregistrement d’un nouveau ou mise à jour
+      * GET "/admin/editPatient" : Modification d’un patient existant
 #### 5. Application principale : HospitalSpringMvcApplication
  -  Lance l’application Spring Boot.
  -  Implémente CommandLineRunner pour insérer des données de test à l’exécution :
- -  Insertion de trois patients dans la base H2 embarquée.
+         *  Insertion de trois patients dans la base H2 embarquée.
+ - Point d’entrée de l'application Spring Boot.
+ - Insertion automatique de données initiales via CommandLineRunner.
+ - Configuration du PasswordEncoder.
 #### 6. Vue Thymeleaf : patients.html
  -  Template HTML avec intégration de Bootstrap 5 via WebJars.
  -  Formulaire de recherche.
@@ -58,6 +63,25 @@ Créer une application web en utilisant le framework Spring Boot , permettant de
  -  Template HTML avec intégration de Bootstrap 5 via WebJars.
  -  Intégration jQuery pour interactivité.
  -  Création d'un navbar intéractive.
+#### 9. Vue Thymeleaf : NotAuthorized.html
+ -  Template HTML avec intégration de Bootstrap 5 via WebJars.
+ -  Intégration jQuery pour interactivité.
+ -  Création d'une interface pour les requêtes non autorisée.
+#### 10. Service Web : UserDetailsService.java
+ - Implémente UserDetailsService.
+ - Convertit AppUser en UserDetails avec ses rôles.
+ - Utilise Lombok pour l'injection de dépendances.
+#### 11. Security : SecurityConfig.java
+ - Active Spring Security.
+ - Configure les accès selon les rôles (/user/** pour USER, /admin/** pour ADMIN).
+ - Personnalise la page de login et la gestion des erreurs d'accès.
+#### 12. Web Controller : PatientController.java
+ - Gère les routes CRUD : affichage, ajout, modification, suppression.
+ - Pagination et recherche par mot-clé.
+ - Utilisation de @Valid pour la validation côté serveur.
+#### 13. Web Controller : SecurityController.java
+ - Gère les vues de connexion et erreur d'accès (/login, /notAuthorized).
+
 
 ## Dépendances principales :
  -  Spring Data JPA : Persistance ORM
@@ -67,6 +91,8 @@ Créer une application web en utilisant le framework Spring Boot , permettant de
  -  Bootstrap & Bootstrap-icons : Styling CSS/JS
  -  Lombok : Réduction du code boilerplate
  -  MySQL Connector : Connexion à MySQL (facultatif si utilisé)
+ -  Spring Boot
+ -  Spring Security
 
 ## Fonctionnalités Implémentées :
  -  Recherche par nom : Permet de filtrer les patients selon un mot-clé.
@@ -78,7 +104,18 @@ Créer une application web en utilisant le framework Spring Boot , permettant de
  -  Création de nouveaux patients.
  -  Édition de patients : Permet de modifier les informations d'un patient existant.
  -  Validation des données : Permet de vérifier certaines contraintes dans la saisie avant la création d'n nouveau patient.
- -  
+ -  Gestion des autorisations par rôles.
+ -  Gestion d'authentification.
+ -  Création des utilisateurs.
+
+## Gestion de la Sécurité :
+ -  Deux rôles principaux : USER et ADMIN.
+ -  Accès restreint selon les rôles :
+   * /user/** → accessible uniquement aux utilisateurs.
+   * /admin/** → réservé aux administrateurs.
+ -  Page de login personnalisée (/login).
+ -  Gestion des erreurs d'accès non autorisé (/notAuthorized).
+ -  Mots de passe encodés avec BCryptPasswordEncoder.
 
 ## Démonstration
 
@@ -122,6 +159,8 @@ Sécurité :
 ![image](https://github.com/user-attachments/assets/1457c7a9-d260-4c2e-82b9-5594c959f698)
 
 ![image](https://github.com/user-attachments/assets/36800a70-9c29-4f42-a572-d8c67ea496e3)
+![image](https://github.com/user-attachments/assets/93c4f10b-2297-4680-af38-cea962934509)
+
 
 
 
@@ -130,4 +169,5 @@ Sécurité :
 
 
 ## Conclusion
-Ce TP illustre parfaitement les bases de la création d’une application MVC avec Spring Boot , utilisant JPA , Thymeleaf et des outils modernes comme Bootstrap . Il s’agit d’un bon point de départ pour développer une application de gestion hospitalière plus complète, notamment en ajoutant des fonctionnalités CRUD et une sécurité (ex: Spring Security).
+Ce TP illustre parfaitement les bases de la création d’une application MVC avec Spring Boot , utilisant JPA , Thymeleaf et des outils modernes comme Bootstrap . Il s’agit d’un bon point de départ pour développer une application de gestion hospitalière plus complète, notamment en ajoutant des fonctionnalités CRUD et une sécurité robuste(Spring Security).
+En approfondissant certaines parties (tests, internationalisation, déploiement), cette application pourrait facilement être utilisée dans un contexte professionnel.
